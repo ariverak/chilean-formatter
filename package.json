@@ -2,7 +2,7 @@
   "name": "chilean-formatter",
   "version": "1.0.0",
   "description": "formateador de rut, verificador de rut y formateador de clp",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "babel-node index.js --presets es2015,stage-2",
     "build": "babel index.js -d dist --presets es2015,stage-2",
