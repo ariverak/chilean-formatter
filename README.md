@@ -5,3 +5,4 @@
     - cleanRutWithoutDv("181303859") -> 18130385
     - validateRut("181303859")  -> true
     - numberToClp("1256500") -> $1.250.200 
+    - getRutDv(18130385) -> 9

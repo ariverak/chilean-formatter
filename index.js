@@ -70,3 +70,12 @@ export function numberToClp(monto) {
     }
     return `$${finalValue?finalValue:''}${array.reverse().join('.')}`
 }
+export function getRutDv(cleanRut) {
+    let newCleanRut = cleanRut.toString().split("").reverse().join("");
+    let suma = 0;
+    for(let i=0,j=2; i < newCleanRut.length; i++, ((j===7) ? j=2 : j++)) {
+        suma += (parseInt(newCleanRut.charAt(i),10) * j); 
+    }
+    let n_dv = 11 - (suma % 11);
+    return ((n_dv === 11) ? 0 : ((n_dv === 10) ? "K" : n_dv));
+}

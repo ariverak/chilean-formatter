@@ -1,0 +1,28 @@
+{
+  "name": "chilean-formatter",
+  "version": "1.0.0",
+  "description": "formateador de rut, verificador de rut y formateador de clp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ariverak/chilean-formatter.git"
+  },
+  "keywords": [
+    "javascript",
+    "rut",
+    "clp",
+    "formateador",
+    "formatter",
+    "formated",
+    "format"
+  ],
+  "author": "ariverak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ariverak/chilean-formatter/issues"
+  },
+  "homepage": "https://github.com/ariverak/chilean-formatter#readme"
+}
