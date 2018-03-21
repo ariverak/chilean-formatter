@@ -1,5 +1,5 @@
 export function formatterRut(rut) {
-    var actual = rut.replace(/^0+/, "");
+    var actual = rut.toString().replace(/^0+/, "");
     if (actual != '' && actual.length > 1) {
         var sinPuntos = actual.replace(/\./g, "");
         var actualLimpio = sinPuntos.replace(/-/g, "");
@@ -21,16 +21,12 @@ export function formatterRut(rut) {
     return rutPuntos;
 }
 
-export function cleanRutWithDv(rut){
-    var sinPuntos = rut.replace(/\./g, "");
+export function cleanRut(rut,withoutDv = false){
+    var sinPuntos = rut.toString().replace(/\./g, "");
     var actualLimpio = sinPuntos.replace(/-/g, "");
-    return actualLimpio
+    return withDv ? actualLimpio : actualLimpio.substring(0, actualLimpio.length - 1);
 }
-export function cleanRutWithoutDv (rut){
-    var sinPuntos = rut.replace(/\./g, "");
-    var actualLimpio = sinPuntos.replace(/-/g, "");
-    return actualLimpio.substring(0, actualLimpio.length - 1);
-}
+
 export function validateRut(rut){
         if (!/^0*(\d{1,3}(\.?\d{3})*)-?([\dkK])$/.test(rut.toString())) {
           return false
