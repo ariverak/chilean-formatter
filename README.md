@@ -1,7 +1,7 @@
 # chilean-formatter
 - #### Installation
      - npm install --save chilean-formatter
-USAGE
+# USAGE
     - formatterRut("181303859") -> 18.130.385-9
     - cleanRut("18.130.385-9") -> 181303859 // with dv
     - cleanRut("18.130.385-9",true) -> 18130385 // without dv
