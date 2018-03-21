@@ -1,11 +1,11 @@
 {
   "name": "chilean-formatter",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "description": "formateador de rut, verificador de rut y formateador de clp",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "start": "babel-node index.js --presets es2015,stage-2",
-    "build": "babel index.js -d dist --presets es2015",
+    "start": "babel-node index.js --presets es2015,stage-2,react,react-native",
+    "build": "babel index.js -d dist --presets es2015,stage-2,react,react-native",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,12 +28,13 @@
   },
   "homepage": "https://github.com/ariverak/chilean-formatter#readme",
   "devDependencies": {
+  
+  },
+  "dependencies": {
+    "babel-preset-react": "^6.24.1",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-preset-react-native": "^4.0.0"
-  },
-  "dependencies": {
-   
   }
 }

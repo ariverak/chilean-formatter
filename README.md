@@ -1,5 +1,5 @@
 # chilean-formatter
-- #### Installation
+# Installation
      - npm install --save chilean-formatter
 # USAGE
     - formatterRut("181303859") -> 18.130.385-9
