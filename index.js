@@ -24,7 +24,7 @@ export function formatterRut(rut) {
 export function cleanRut(rut,withoutDv = false){
     var sinPuntos = rut.toString().replace(/\./g, "");
     var actualLimpio = sinPuntos.replace(/-/g, "");
-    return withDv ? actualLimpio : actualLimpio.substring(0, actualLimpio.length - 1);
+    return withoutDv ? actualLimpio : actualLimpio.substring(0, actualLimpio.length - 1);
 }
 
 export function validateRut(rut){
