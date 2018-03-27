@@ -1,24 +1,24 @@
 export function formatterRut(rut) {
     var actual = rut.toString().replace(/^0+/, "");
-    if (actual != '' && actual.length > 1) {
-        var sinPuntos = actual.replace(/\./g, "");
-        var actualLimpio = sinPuntos.replace(/-/g, "");
-        var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-        var rutPuntos = "";
-        var i = 0;
-        var j = 1;
-        for (i = inicio.length - 1; i >= 0; i--) {
-            var letra = !/^([0-9])*$/.test(inicio.charAt(i)) ? '' : inicio.charAt(i);
-            rutPuntos = letra + rutPuntos;
-            if (j % 3 == 0 && j <= inicio.length - 1) {
-                rutPuntos = "." + rutPuntos;
+        if (actual != '' && actual.length > 1) {
+            var sinPuntos = actual.replace(/\./g, "");
+            var actualLimpio = sinPuntos.replace(/-/g, "");
+            var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
+            var rutPuntos = "";
+            var i = 0;
+            var j = 1;
+            for (i = inicio.length - 1; i >= 0; i--) {
+                var letra = !/^([0-9])*$/.test(inicio.charAt(i)) ? '' : inicio.charAt(i);
+                rutPuntos = letra + rutPuntos;
+                if (j % 3 == 0 && j <= inicio.length - 1) {
+                    rutPuntos = "." + rutPuntos;
+                }
+                j++;
             }
-            j++;
+            var dv = actualLimpio.substring(actualLimpio.length - 1);
+            rutPuntos = rutPuntos + "-" + dv;
         }
-        var dv = actualLimpio.substring(actualLimpio.length - 1);
-        rutPuntos = rutPuntos + "-" + dv;
-    }
-    return rutPuntos;
+        return rutPuntos;
 }
 
 export function cleanRut(rut,withoutDv = false){
@@ -31,7 +31,7 @@ export function validateRut(rut){
         if (!/^0*(\d{1,3}(\.?\d{3})*)-?([\dkK])$/.test(rut.toString())) {
           return false
         }
-        rut = cleanRutWithDv(rut)
+        rut = cleanRut(rut,true)
         var t = parseInt(rut.slice(0, -1), 10)
         var m = 0
         var s = 1
