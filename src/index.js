@@ -16,9 +16,9 @@ export function formatterRut(rut) {
                 j++;
             }
             var dv = actualLimpio.substring(actualLimpio.length - 1);
-            rutPuntos = rutPuntos + "-" + dv;
+            return rutPuntos = rutPuntos + "-" + dv;
         }
-        return actual;
+      return actual;
 }
 
 export function cleanRut(rut,withoutDv = false){
