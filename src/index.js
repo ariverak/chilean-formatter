@@ -1,6 +1,6 @@
 export function formatterRut(rut) {
     var actual = rut.toString().replace(/^0+/, "");
-        if (actual != '' && actual.length > 1) {
+        if (actual != '' && actual.length > 0) {
             var sinPuntos = actual.replace(/\./g, "");
             var actualLimpio = sinPuntos.replace(/-/g, "");
             var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
@@ -18,7 +18,7 @@ export function formatterRut(rut) {
             var dv = actualLimpio.substring(actualLimpio.length - 1);
             rutPuntos = rutPuntos + "-" + dv;
         }
-        return rutPuntos;
+        return '';
 }
 
 export function cleanRut(rut,withoutDv = false){
