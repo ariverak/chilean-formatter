@@ -44,7 +44,9 @@ export function validateRut(rut){
 }
 
 export function numberToClp(monto,separator = ".") {
-    let valueConverted = monto.toString().replace(/\D/g, '').split("").reverse()
+    let cleanValue = monto.toString().replace(/\D/g, '');
+    let valueConverted = cleanValue ?cleanValue.split("").reverse() : "";
+    if(!valueConverted)return "";
     const length = valueConverted.length;
     const divs = length / 3;
     const sobr = length % 3;
