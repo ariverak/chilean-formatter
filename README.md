@@ -9,7 +9,10 @@
     - numberToClp("1256500") -> $1.256.500 
     - numberToClp("1256500",',') -> $1,256,500  // with separator
     - getRutDv(18130385) -> 9
-# Usage 
-     import { formatterRut } from 'chilean-formatter'  
-          const rut = "181303859";  
-          const newRut = formatterRut(rut);
+![](https://github.com/ariverak/chilean-formatter/blob/master/gif/numberToClp.gif)
+# Example 
+     import { numberToClp } from 'chilean-formatter'  
+          const price = "60000";  
+          console.log(formatterRut(price))  // $60.000
+ 
+
