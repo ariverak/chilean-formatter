@@ -43,7 +43,7 @@ export function validateRut(rut){
         return v === rut.slice(-1)
 }
 
-function numberToClp(monto,separator = ".") {
+export function numberToClp(monto,separator = ".") {
     let valueConverted = monto.toString().replace(/\D/g, '').split("").reverse()
     const length = valueConverted.length;
     const divs = length / 3;

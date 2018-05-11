@@ -1,6 +1,6 @@
 {
   "name": "chilean-formatter",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "formateador de rut, verificador de rut y formateador de clp",
   "main": "index.js",
   "scripts": {
