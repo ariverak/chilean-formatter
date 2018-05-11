@@ -13,6 +13,6 @@
 # Example 
      import { numberToClp } from 'chilean-formatter'  
           const price = "60000";  
-          console.log(formatterRut(price))  // $60.000
+          console.log(numberToClp(price))  // $60.000
  
 
