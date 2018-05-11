@@ -43,8 +43,8 @@ export function validateRut(rut){
         return v === rut.slice(-1)
 }
 
-export function numberToClp(monto) {
-    let valueConverted = monto.toString().split("").reverse()
+export function numberToClp(monto,separator = ".") {
+    let valueConverted = monto.toString().replace(/\D/g, '').split("").reverse()
     const length = valueConverted.length;
     const divs = length / 3;
     const sobr = length % 3;
@@ -59,13 +59,14 @@ export function numberToClp(monto) {
     })
     if(sobr){
       let valSobr = valueConverted.reverse().slice(0,sobr)
-      let point = length < 3 ? '' : '.'
-      finalValue = valSobr.join('')+ point
+      let point = length < 3 ? '' : separator;
+      finalValue = valSobr.join('')+ point;
     }else{
       array.push(monto.toString().split('').slice(0,3).join(''))
     }
-    return `$${finalValue?finalValue:''}${array.reverse().join('.')}`
+    return `$${finalValue?finalValue:''}${array.reverse().join(separator)}`
 }
+
 export function getRutDv(cleanRut) {
     let newCleanRut = cleanRut.toString().split("").reverse().join("");
     let suma = 0;
