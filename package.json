@@ -1,6 +1,6 @@
 {
   "name": "chilean-formatter",
-  "version": "1.8.6",
+  "version": "1.8.8",
   "description": "formateador de rut, verificador de rut y formateador de clp",
   "main": "index.js",
   "scripts": {
@@ -27,9 +27,7 @@
     "url": "https://github.com/ariverak/chilean-formatter/issues"
   },
   "homepage": "https://github.com/ariverak/chilean-formatter#readme",
-  "devDependencies": {
-  
-  },
+  "devDependencies": {},
   "dependencies": {
     "babel-preset-react": "^6.24.1",
     "babel-cli": "^6.26.0",

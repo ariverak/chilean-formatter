@@ -8,6 +8,7 @@
     - validateRut("181303859")  -> true
     - numberToClp("1256500") -> $1.256.500 
     - numberToClp("1256500",',') -> $1,256,500  // with separator
+    - cleanClp("$1.256.500") -> 1256500  
     - getRutDv(18130385) -> 9
 ![](https://github.com/ariverak/chilean-formatter/blob/master/gif/numberToClp.gif)
 # Example 

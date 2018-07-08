@@ -43,7 +43,7 @@ export function validateRut(rut){
         return v === rut.slice(-1)
 }
 
-export function numberToClp(monto,separator = ".") {
+export function numberToClp(monto,separator = ".",symbol = "$") {
     let cleanValue = monto.toString().replace(/\D/g, '');
     let valueConverted = cleanValue ?cleanValue.split("").reverse() : "";
     if(!cleanValue)return "";
@@ -53,22 +53,25 @@ export function numberToClp(monto,separator = ".") {
     let finalValue;
     let array = [];
     valueConverted.reduce((previus,current,index)=>{
-      if(index % 3 == 0){
-        array.push(previus.split("").reverse().join(""))
-        return current
-      }
-      return previus+current 
+        if(index % 3 == 0){
+            array.push(previus.split("").reverse().join(""))
+            return current
+        }
+        return previus+current;
     })
     if(sobr){
-      let valSobr = valueConverted.reverse().slice(0,sobr)
-      let point = length < 3 ? '' : separator;
-      finalValue = valSobr.join('')+ point;
+        let valSobr = valueConverted.reverse().slice(0,sobr)
+        let point = length < 3 ? '' : separator;
+        finalValue = valSobr.join('')+ point;
     }else{
-      array.push(valueConverted.reverse().slice(0,3).join(''))
+        array.push(valueConverted.reverse().slice(0,3).join(''))
     }
-    return `$${finalValue?finalValue:''}${array.reverse().join(separator)}`
+    return `${symbol}${finalValue?finalValue:''}${array.reverse().join(separator)}`
 }
-
+export function cleanClp(monto) {
+   return monto.toString().replace(/\D/g, '');
+}
+ 
 export function getRutDv(cleanRut) {
     let newCleanRut = cleanRut.toString().split("").reverse().join("");
     let suma = 0;
