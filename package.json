@@ -1,24 +1,50 @@
 {
   "name": "chilean-formatter",
-  "version": "2.0.1",
-  "description": "formateador de rut, verificador de rut y formateador de clp",
-  "main": "./lib/index.js",
+  "version": "3.0.0",
+  "description": "Formateador y validador de RUT y CLP chilenos. TypeScript, dual ESM/CJS, zero deps.",
+  "type": "module",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    }
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@10.12.4",
   "scripts": {
-    "build": "babel src --out-dir lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "prepublishOnly": "pnpm typecheck && pnpm test && pnpm build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ariverak/chilean-formatter.git"
   },
   "keywords": [
-    "javascript",
     "rut",
     "clp",
-    "formateador",
+    "chile",
+    "chilean",
     "formatter",
-    "formated",
-    "format"
+    "validator",
+    "typescript"
   ],
   "author": "ariverak",
   "license": "MIT",
@@ -26,10 +52,18 @@
     "url": "https://github.com/ariverak/chilean-formatter/issues"
   },
   "homepage": "https://github.com/ariverak/chilean-formatter#readme",
-  "devDependencies": {},
-  "dependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4"
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@vitest/coverage-v8": "^4.1.7",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vite": "^6.4.2",
+    "vitest": "^4.1.7"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^6.4.2",
+      "esbuild": "^0.25.0"
+    }
   }
 }
