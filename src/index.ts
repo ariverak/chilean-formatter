@@ -1,82 +1,54 @@
-export function formatterRut(rut: string | number): string {
-  const actual = rut.toString().replace(/^0+/, "");
-  if (actual !== "" && actual.length > 1) {
-    const sinPuntos = actual.replace(/\./g, "");
-    const actualLimpio = sinPuntos.replace(/-/g, "");
-    const inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-    let rutPuntos = "";
-    let j = 1;
-    for (let i = inicio.length - 1; i >= 0; i--) {
-      const letra = !/^([0-9])*$/.test(inicio.charAt(i)) ? "" : inicio.charAt(i);
-      rutPuntos = letra + rutPuntos;
-      if (j % 3 === 0 && j <= inicio.length - 1) {
-        rutPuntos = "." + rutPuntos;
-      }
-      j++;
-    }
-    const dv = actualLimpio.substring(actualLimpio.length - 1);
-    return rutPuntos + "-" + dv;
+const THOUSANDS_SEPARATOR_BOUNDARY = /\B(?=(\d{3})+(?!\d))/g;
+const RUT_FORMAT = /^0*\d{1,3}(\.?\d{3})*-?[\dkK]$/;
+const NON_DIGIT = /\D/g;
+const RUT_PUNCTUATION = /[.\-]/g;
+
+function computeDv(body: string): number | "K" {
+  let sum = 0;
+  let factor = 2;
+  for (let i = body.length - 1; i >= 0; i--) {
+    sum += Number(body[i]) * factor;
+    factor = factor === 7 ? 2 : factor + 1;
   }
-  return actual;
+  const remainder = 11 - (sum % 11);
+  if (remainder === 11) return 0;
+  if (remainder === 10) return "K";
+  return remainder;
+}
+
+export function formatterRut(rut: string | number): string {
+  const stripped = rut.toString().replace(/^0+/, "").replace(RUT_PUNCTUATION, "");
+  if (stripped.length <= 1) return stripped;
+  const body = stripped.slice(0, -1).replace(THOUSANDS_SEPARATOR_BOUNDARY, ".");
+  const dv = stripped.slice(-1);
+  return `${body}-${dv}`;
 }
 
 export function cleanRut(rut: string | number, withoutDv = false): string {
-  const sinPuntos = rut.toString().replace(/\./g, "");
-  const actualLimpio = sinPuntos.replace(/-/g, "");
-  return withoutDv ? actualLimpio : actualLimpio.substring(0, actualLimpio.length - 1);
+  const clean = rut.toString().replace(RUT_PUNCTUATION, "");
+  return withoutDv ? clean : clean.slice(0, -1);
 }
 
 export function validateRut(rut: string | number): boolean {
-  if (!/^0*(\d{1,3}(\.?\d{3})*)-?([\dkK])$/.test(rut.toString())) {
-    return false;
-  }
-  const limpio = cleanRut(rut, true);
-  let t = Number.parseInt(limpio.slice(0, -1), 10);
-  let m = 0;
-  let s = 1;
-  while (t > 0) {
-    s = (s + (t % 10) * (9 - (m++ % 6))) % 11;
-    t = Math.floor(t / 10);
-  }
-  const v = s > 0 ? "" + (s - 1) : "K";
-  return v === limpio.slice(-1).toUpperCase();
+  const value = rut.toString();
+  if (!RUT_FORMAT.test(value)) return false;
+  const clean = cleanRut(value, true);
+  const body = clean.slice(0, -1);
+  const dv = clean.slice(-1).toUpperCase();
+  return String(computeDv(body)) === dv;
 }
 
 export function numberToClp(monto: string | number, separator = ".", symbol = "$"): string {
-  const cleanValue = monto.toString().replace(/\D/g, "");
-  if (!cleanValue) return "";
-  const valueConverted: string[] = cleanValue.split("").reverse();
-  const length = valueConverted.length;
-  const sobr = length % 3;
-  let finalValue: string | undefined;
-  const array: string[] = [];
-  valueConverted.reduce((previus, current, index) => {
-    if (index % 3 === 0) {
-      array.push(previus.split("").reverse().join(""));
-      return current;
-    }
-    return previus + current;
-  });
-  if (sobr) {
-    const valSobr = valueConverted.reverse().slice(0, sobr);
-    const point = length < 3 ? "" : separator;
-    finalValue = valSobr.join("") + point;
-  } else {
-    array.push(valueConverted.reverse().slice(0, 3).join(""));
-  }
-  return `${symbol}${finalValue ? finalValue : ""}${array.reverse().join(separator)}`;
+  const digits = monto.toString().replace(NON_DIGIT, "");
+  if (!digits) return "";
+  const grouped = digits.replace(THOUSANDS_SEPARATOR_BOUNDARY, separator);
+  return `${symbol}${grouped}`;
 }
 
 export function cleanClp(monto: string | number): string {
-  return monto.toString().replace(/\D/g, "");
+  return monto.toString().replace(NON_DIGIT, "");
 }
 
 export function getRutDv(cleanRut: string | number): number | "K" {
-  const newCleanRut = cleanRut.toString().split("").reverse().join("");
-  let suma = 0;
-  for (let i = 0, j = 2; i < newCleanRut.length; i++, j === 7 ? (j = 2) : j++) {
-    suma += Number.parseInt(newCleanRut.charAt(i), 10) * j;
-  }
-  const n_dv = 11 - (suma % 11);
-  return n_dv === 11 ? 0 : n_dv === 10 ? "K" : n_dv;
+  return computeDv(cleanRut.toString());
 }

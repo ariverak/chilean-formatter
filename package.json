@@ -13,11 +13,7 @@
       "require": "./lib/index.cjs"
     }
   },
-  "files": [
-    "lib",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["lib", "README.md", "LICENSE"],
   "engines": {
     "node": ">=18"
   },
@@ -37,15 +33,7 @@
     "type": "git",
     "url": "git+https://github.com/ariverak/chilean-formatter.git"
   },
-  "keywords": [
-    "rut",
-    "clp",
-    "chile",
-    "chilean",
-    "formatter",
-    "validator",
-    "typescript"
-  ],
+  "keywords": ["rut", "clp", "chile", "chilean", "formatter", "validator", "typescript"],
   "author": "ariverak",
   "license": "MIT",
   "bugs": {
